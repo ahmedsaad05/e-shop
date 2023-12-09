@@ -36,14 +36,11 @@ exports.createOne = (Model) =>
     res.status(201).json({ data: newDoc });
   });
 
-exports.getOne = (Model, populationOpt) =>
+exports.getOne = (Model) =>
   asyncHandler(async (req, res, next) => {
     const { id } = req.params;
     let query = Model.findById(id);
-    if (populationOpt) {
-      query = query.populate(populationOpt);
-    }
-
+   
     const document = await query;
 
     if (!document) {
